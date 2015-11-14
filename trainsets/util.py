@@ -52,20 +52,17 @@ def extract(cid,pdata):
     result = collections.Counter()
     cid = str(cid)
     keys = pdata[cid].keys()
-
     result[('type',pdata[cid]['type'])] = 1
-    keys.remove('type')
-
     result[('mana',pdata[cid]['mana'])] = 1
     keys.remove('mana')
-    
+    keys.remove('type')
     keys.remove('id')
     if 'image' in keys: keys.remove('image')
     if 'name' in keys: keys.remove('name') 
     # keys.remove('text')
     if 'text' in keys: 
-    #     #result += makeNGramFactors(pdata[cid]['text'],5)
-        # result += makeWordFactors(pdata[cid]['text'])
+        #result += makeNGramFactors(pdata[cid]['text'],5)
+        result += makeWordFactors(pdata[cid]['text'])
         keys.remove('text')
     if 'health' in keys: 
         result[('health',pdata[cid]['health'])] = 1
@@ -75,9 +72,9 @@ def extract(cid,pdata):
         keys.remove('attack')
     
     #print keys
-    #for key in keys:
+    for key in keys:
         #print key
-        #result[pdata[cid][key]] = 1
+        result[pdata[cid][key]] = 1
     return result
 
 def convertTrainset(filename):
