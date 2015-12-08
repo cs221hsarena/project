@@ -87,8 +87,8 @@ def findFeatures(fTrainset):
     with fTrainset as f:
         reader = csv.reader(f, delimiter=';')
         for row in reader:
-            id, score = row
-            idlst = ast.literal_eval(id)
+            ids, score = row
+            idlst = ast.literal_eval(ids)
             for idNum in idlst:
                 if idNum in idStore: continue
                 idStore.append(idNum)
