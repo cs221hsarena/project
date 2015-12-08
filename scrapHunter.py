@@ -13,7 +13,7 @@ def deckstr(ids):
         tmp += "-" + str(ids[i])
     return tmp[1:] 
 
-req_url = "http://draft.heartharena.com/arena/option-multi-score/8/"
+req_url = "http://draft.heartharena.com/arena/option-multi-score/2/"
 
 fData = open('pretend.rtf')
 txt = fData.read()
@@ -21,7 +21,7 @@ sp = txt.split("id\":")
 options = [int(sp[i].split(",")[0]) for i in range(1, len(sp))]
 fData.close()
 
-target = open("trainsetWardlock1001", 'w')
+target = open("trainsetHunter1001", 'w')
 for kk in range(1000):
     deck = []
     record = []

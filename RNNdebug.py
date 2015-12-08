@@ -53,13 +53,13 @@ with open("trainset4.dat", 'r') as f:
         thisFeature = util.extract(chk,data)
         for key in thisFeature.keys(): temp[featureIndexDict[key]] = 1
            ####   #####    ######
-        if n%30 != 0:     #if round 1-29 append attributes
-    	    a.append(temp)
-        else:    #if round 30 save the chosen card index
-            card = str(idlst[elem])
-            b.append(refer[card])
-            c.append((elem, [refer[str(x)] for x in idlst]))
-            n += 1
+    if n%30 != 0:     #if round 1-29 append attributes
+	    a.append(temp)
+    else:    #if round 30 save the chosen card index
+        card = str(idlst[elem])
+        b.append(refer[card])
+        c.append((elem, [refer[str(x)] for x in idlst]))
+        n += 1
         
 
 n = int(n/30)
