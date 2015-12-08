@@ -1,7 +1,7 @@
 
 import random
 import time
-import sys, json, math, os, collections, copy, ast
+import sys, json, math, os, collections, copy, ast, csv
 
 def makeNGramFactors(string,N):
 	letters = string.replace(' ','')
@@ -14,7 +14,7 @@ def makeNGramFactors(string,N):
 def makeWordFactors(string):
     wordCounter = collections.Counter()
     words = string.split()
-    for word in words: wordCounter[word] = 1
+    for word in words: wordCounter[('text',word)] = 1
     return wordCounter
 
 def dotProduct(d1, d2):
@@ -80,7 +80,7 @@ def extract(cid,pdata):
         #result[pdata[cid][key]] = 1
     return result
 
-def findFeatures(fTrainset):
+def findFeatures(fTrainset,pdata):
     features = {}
     idStore = []
     ind = 0;
@@ -92,10 +92,10 @@ def findFeatures(fTrainset):
             for idNum in idlst:
                 if idNum in idStore: continue
                 idStore.append(idNum)
-                counter = extract(idNum,trainset)
+                counter = extract(idNum,pdata)
                 for key in counter.keys():
                     if key not in features.keys():
-                        features[keys] = ind
+                        features[key] = ind
                         ind += 1
     return features
 
