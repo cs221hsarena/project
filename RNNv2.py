@@ -37,29 +37,29 @@ featureIndexDict = util.findFeatures(fTrainset)
 num_feat = len(featureIndexDict.keys())
 ind = 0
 
-with fTrainset as f:
+with open("trainset4.dat", 'r') as f:
     reader = csv.reader(f, delimiter=';')
-    temp = [0 for _ in featureIndexDict.keys()]
     for row in reader:
-        id, score = row
-        idlst = ast.literal_eval(id)
+        temp = [0 for _ in featureIndexDict.keys()]
+        ids, score = row
+        idlst = ast.literal_eval(ids)
         sclst = ast.literal_eval(score)
-	elem = sclst.index(max(sclst))
-	chk = str(idlst[elem])
-        ### NEED TO FIX FEATURES #### 
-        # x = int(data[chk]["mana"])
-        # y = int(data[chk]["attack"]) if data[chk]['type'] != 'Spell' else 0
-        # z = int(data[chk]['health']) if data[chk]['type'] == 'Minion' else 0
-    thisFeature = util.extract(chk,data)
-    for key in thisFeature.keys(): temp[featureIndexDict[key]] = 1
-       ####   #####    ######
-	if n%30 != 0:     #if round 1-29 append attributes
-	    a.append(temp)
-	else:    #if round 30 save the chosen card index
-	    card = str(idlst[elem])
-	    b.append(refer[card])
-	    c.append((elem, [refer[str(x)] for x in idlst]))
-        n += 1
+        elem = sclst.index(max(sclst))
+        chk = str(idlst[elem])
+            ### NEED TO FIX FEATURES #### 
+            # x = int(data[chk]["mana"])
+            # y = int(data[chk]["attack"]) if data[chk]['type'] != 'Spell' else 0
+            # z = int(data[chk]['health']) if data[chk]['type'] == 'Minion' else 0
+        thisFeature = util.extract(chk,data)
+        for key in thisFeature.keys(): temp[featureIndexDict[key]] = 1
+           ####   #####    ######
+        if n%30 != 0:     #if round 1-29 append attributes
+            a.append(temp)
+        else:    #if round 30 save the chosen card index
+            card = str(idlst[elem])
+            b.append(refer[card])
+            c.append((elem, [refer[str(x)] for x in idlst]))
+            n += 1
 
 n = int(n/30)
 X_train = np.zeros((n, nb_rounds-1, num_feat), np.int)
