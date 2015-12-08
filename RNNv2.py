@@ -32,8 +32,8 @@ nb_rounds = 30
 nb_cards = 3
 r = 0
 fTrainset = open("trainset4.dat", 'r')
-trainset = json.loads(fTrainset.read()) 
-featureIndexDict = util.findFeatures(fTrainset)
+#trainset = json.loads(fTrainset.read()) 
+featureIndexDict = util.findFeatures(fTrainset,data)
 num_feat = len(featureIndexDict.keys())
 ind = 0
 
