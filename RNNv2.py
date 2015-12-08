@@ -27,13 +27,14 @@ a = []
 b = []
 c = []
 n = 0
-num_feat = 3
+#num_feat = 3
 nb_rounds = 30
 nb_cards = 3
 r = 0
 fTrainset = open("trainset4", 'r')
 trainset = json.loads(fTrainset.read())
 featureIndexDict = util.findFeatures(fTrainset)
+num_feat = len(featureIndexDict.keys())
 ind = 0
 
 with fTrainset as f:
