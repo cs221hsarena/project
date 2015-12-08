@@ -21,8 +21,8 @@ sp = txt.split("id\":")
 options = [int(sp[i].split(",")[0]) for i in range(1, len(sp))]
 fData.close()
 
-target = open("trainset2", 'w')
-for kk in range(100):
+target = open("trainset1000", 'w')
+for kk in range(1000):
     deck = []
     record = []
     print "round %d" %kk
@@ -39,8 +39,8 @@ for kk in range(100):
         deck.append(id[maxind])
         target.write(str(id) + ";" + str(score))
         target.write("\n")
-        time.sleep(3)
-    time.sleep(5)
+        #time.sleep(3)
+    #time.sleep(5)
 
 target.close()
 

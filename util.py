@@ -65,8 +65,8 @@ def extract(cid,pdata):
     # keys.remove('text')
     if 'text' in keys: 
     #     #result += makeNGramFactors(pdata[cid]['text'],5)
-        # result += makeWordFactors(pdata[cid]['text'])
-        keys.remove('text')
+        result += makeWordFactors(pdata[cid]['text'])
+        #keys.remove('text')
     if 'health' in keys: 
         result[('health',pdata[cid]['health'])] = 1
         keys.remove('health')
@@ -79,6 +79,27 @@ def extract(cid,pdata):
         #print key
         #result[pdata[cid][key]] = 1
     return result
+
+def findFeatures(fTrainset):
+    features = {}
+    idStore = []
+    ind = 0;
+    with fTrainset as f:
+        reader = csv.reader(f, delimiter=';')
+        for row in reader:
+            id, score = row
+            idlst = ast.literal_eval(id)
+            for idNum in idlst:
+                if idNum in idStore: continue
+                idStore.append(idNum)
+                counter = extract(idNum,trainset)
+                for key in counter.keys():
+                    if key not in features.keys():
+                        features[keys] = ind
+                        ind += 1
+    return features
+
+    
 
 def convertTrainset(filename):
     
