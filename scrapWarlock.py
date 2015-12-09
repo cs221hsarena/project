@@ -21,8 +21,8 @@ sp = txt.split("id\":")
 options = [int(sp[i].split(",")[0]) for i in range(1, len(sp))]
 fData.close()
 
-target = open("trainsetWardlock1001", 'w')
-for kk in range(1000):
+target = open("trainsetWarlock2003", 'w')
+for kk in range(2000):
     deck = []
     record = []
     print "round %d" %kk
