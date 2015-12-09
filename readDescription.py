@@ -15,7 +15,8 @@ pCard = json.loads(line)
 #				if text has 'summon', read minion data
 #	weapon: mana text health attack
 
-fTrainset = open('./trainsets/rearranged.json')
+#fTrainset = open('./trainsets/rearranged.json')
+fTrainset = open('./trainsets/trainsetHunterCombined.json')
 trainset = json.loads(fTrainset.read())
 extract = util.extract
 weights = str(dict(util.learnPredictor(trainset,extract,pCard)))

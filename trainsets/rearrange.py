@@ -2,8 +2,9 @@ import random
 import time
 import sys, json, math, os, collections
 
-trainsetNum = '2'
-trainset = open('trainset'+trainsetNum+'.dat')
+#trainsetNum = '2'
+#trainset = open('trainset'+trainsetNum+'.dat')
+trainset = open('trainsetHunterCombined.txt')
 
 newStruct = []
 for line in trainset:
@@ -35,6 +36,6 @@ for line in trainset:
 # 	for i in [0,1,2]:
 # 		newStruct.append((int(cardIds[i]),float(cardRates[i])))
 
-newtrainset = open('rearranged'+trainsetNum+'.json','w')
-# newtrainset = open('rearranged.json','w')
+#newtrainset = open('rearranged'+trainsetNum+'.json','w')
+newtrainset = open('trainsetHunterCombined.json','w')
 json.dump(newStruct,newtrainset)
