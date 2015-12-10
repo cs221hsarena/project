@@ -11,10 +11,23 @@ def makeNGramFactors(string,N):
 		ngramCounter[('text',letters[i:(i+N)])] = 1
 	return ngramCounter
 
+def makeTwoWordFactors(string):
+    wordCounter = collections.Counter()
+    words = string.split()
+    for i in range(0,len(words)-2):
+        wordCounter[('text',words[i],words[i+1])] = 1
+    # for word in words: 
+    #     if word not in ignoreWordList:
+    #         wordCounter[('text',word)] = 1
+    return wordCounter 
+
 def makeWordFactors(string):
     wordCounter = collections.Counter()
     words = string.split()
-    for word in words: wordCounter[('text',word)] = 1
+    ignoreWordList = ['a','the','an','and','or','to']
+    for word in words: 
+        if word not in ignoreWordList:
+            wordCounter[('text',word)] = 1
     return wordCounter
 
 def dotProduct(d1, d2):
@@ -65,7 +78,8 @@ def extract(cid,pdata):
     # keys.remove('text')
     if 'text' in keys: 
     #     #result += makeNGramFactors(pdata[cid]['text'],5)
-        result += makeWordFactors(pdata[cid]['text'])
+        #result += makeWordFactors(pdata[cid]['text'])
+        result += makeTwoWordFactors(pdata[cid]['text'])
         #keys.remove('text')
     if 'health' in keys: 
         result[('health',pdata[cid]['health'])] = 1
@@ -99,7 +113,32 @@ def findFeatures(fTrainset,pdata):
                         ind += 1
     return features
 
-    
+def findFeaturesWithRepeats(fTrainset,pdata):
+    features = {}
+    idStore = []
+    ind = 0;
+    with fTrainset as f:
+        reader = csv.reader(f, delimiter=';')
+        for row in reader:
+            ids, score = row
+            idlst = ast.literal_eval(ids)
+            for idNum in idlst:
+                if idNum in idStore: continue
+                idStore.append(idNum)
+                counter = extract(idNum,pdata)
+                for key in counter.keys():
+                    if key in features.keys():
+                        features[key][1] += 1
+                    else:
+                        features[key] = (ind,1)
+                        ind += 1
+    return features    
+
+def filterPopularFeatures(features,featNum):
+    popularFeatures = [ for _ in range(featNum)]
+    lowestSaved = (0,0)
+    #for key in features.keys():
+
 
 def convertTrainset(filename):
     
