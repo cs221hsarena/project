@@ -51,7 +51,8 @@ with open("trainset4.dat", 'r') as f:
             # y = int(data[chk]["attack"]) if data[chk]['type'] != 'Spell' else 0
             # z = int(data[chk]['health']) if data[chk]['type'] == 'Minion' else 0
         thisFeature = util.extract(chk,data)
-        for key in thisFeature.keys(): temp[featureIndexDict[key]] = 1
+        for key in thisFeature.keys():
+            if key in featureIndexDict.keys(): temp[featureIndexDict[key]] = 1
            ####   #####    ######
         if n%30 != 0:     #if round 1-29 append attributes
             a.append(temp)

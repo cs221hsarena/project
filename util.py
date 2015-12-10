@@ -130,14 +130,26 @@ def findFeaturesWithRepeats(fTrainset,pdata):
                     if key in features.keys():
                         features[key][1] += 1
                     else:
-                        features[key] = (ind,1)
+                        features[key] = [ind,1]
                         ind += 1
     return features    
 
 def filterPopularFeatures(features,featNum):
-    popularFeatures = [ for _ in range(featNum)]
-    lowestSaved = (0,0)
-    #for key in features.keys():
+    popularFeatures = [(0,0,0) for _ in range(featNum)]
+    for key in features.keys():
+        if features[key][1] > popularFeatures[0][2]:
+            del popularFeatures[0]
+            print popularFeatures
+            for i in range(featNum-1):
+                if features[key][1] < popularFeatures[i][2]:
+                    popularFeatures.insert(i,(key,features[key][0],features[key][1]))
+                    break
+                if i == featNum-2: popularFeatures.append((key,features[key][0],features[key][1]))
+    popularFeaturesDict = {}
+    for j,item in enumerate(popularFeatures):
+        popularFeaturesDict[item[0]] = j
+    return popularFeaturesDict
+
 
 
 def convertTrainset(filename):

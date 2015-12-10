@@ -33,7 +33,8 @@ nb_cards = 3
 r = 0
 fTrainset = open("trainset4.dat", 'r')
 #trainset = json.loads(fTrainset.read()) 
-featureIndexDict = util.findFeatures(fTrainset,data)
+featureIndexDict = util.filterPopularFeatures(util.findFeaturesWithRepeats(fTrainset,data),10)
+#num_feat = len(featureIndexDict.keys())
 num_feat = len(featureIndexDict.keys())
 ind = 0
 
@@ -51,7 +52,8 @@ with open("trainset4.dat", 'r') as f:
             # y = int(data[chk]["attack"]) if data[chk]['type'] != 'Spell' else 0
             # z = int(data[chk]['health']) if data[chk]['type'] == 'Minion' else 0
         thisFeature = util.extract(chk,data)
-        for key in thisFeature.keys(): temp[featureIndexDict[key]] = 1
+        for key in thisFeature.keys(): 
+            if key in featureIndexDict.keys(): temp[featureIndexDict[key]] = 1
            ####   #####    ######
     if n%30 != 0:     #if round 1-29 append attributes
 	    a.append(temp)

@@ -16,10 +16,10 @@ pCard = json.loads(line)
 #	weapon: mana text health attack
 
 #fTrainset = open('./trainsets/rearranged.json')
-fTrainset = open('./trainsets/trainsetHunterCombined.json')
+fTrainset = open('./trainsets/trainsetWarlockCombined.json')
 trainset = json.loads(fTrainset.read())
 extract = util.extract
 weights = str(dict(util.learnPredictor(trainset,extract,pCard)))
-fSaveWeights = open('weights.json','w')
+fSaveWeights = open('weightsWL.json','w')
 json.dump(weights,fSaveWeights)
 

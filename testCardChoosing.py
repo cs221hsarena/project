@@ -6,10 +6,11 @@ import util
 fPretend = open('pretend.json')
 line = fPretend.read().replace("\\", '')
 pCard = json.loads(line)
-fWeights = open('weights.json')
+fWeights = open('weightsWL.json')
 weights = collections.Counter(ast.literal_eval(json.loads(fWeights.read())))
 
-fTestData = open('./trainsets/trainset4.json')
+#fTestData = open('./trainsets/trainset4.json')
+fTestData = open('./trainsets/testsetWarlock.json')
 #fTestData = open('./trainsets/trainsetHunterCombined.txt')
 testData = ast.literal_eval(json.loads(fTestData.read()))
 
